@@ -279,3 +279,8 @@ html {
     }
   }
 }
+@media (min-width: 576px) {
+  .d-sm-block {
+    display: inline-block !important;
+  }
+}
