@@ -1,0 +1,107 @@
+<div class="row no-padding-margin notes_list_card">
+  <% unless @notes.blank? %>
+    <% @notes.each do |note| %>
+      <div class="col-sm-4 mb-4">
+        <div class="card note_card" data-title="<%= note.title %>" data-body="<%= note.body %>" data-tags="<%= note.tag_list %>">
+          <div class="card-body">
+            <% if user_signed_in? %>
+              <%= link_to("×", delete_note_path(note.id), data: {confirm: "are you sure?"}, method: :delete, class: "del_note") %>
+            <% end %>
+            <span class="card-title"><%= note.title %></span>
+            <p class="note-body"><%= note.body %></p>
+            <% note.tag_list.first(2).each do |tag| %>
+              <span class="note_tag"><%= tag %></span>
+            <% end %>
+            <% if (note.tag_list.length - 2) > 0 %>
+              <span class="note_tag">+ <%= note.tag_list.length - 3 %> more</span>
+            <% end %>
+          </div>
+          <div class="card-footer">
+            By <%= note.user.name %> <span class="text-muted pull-right"><%= time_ago_in_words(note.created_at) %> ago</span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <% if user_signed_in? %>
+    <div class="col-sm-12 col-md-3 col-lg-3">
+      <div class="card addNewNoteCard">
+        <div class="card-body">
+          <a href="javascript:void(0)" class="addNotes" data-toggle="modal" data-target="#newNoteModal">
+            <i class="fa fa-plus"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% content_for :modals do %>
+  <% if user_signed_in? %>
+    <div class="modal fade" id="newNoteModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title">New Note</div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+          <%= form_for current_user.notes.new, url: new_note_path, method: :post, remote: true, html: { class: "newNoteForm" } do |f| %>
+            <div class="modal-body">
+              <div class="customisedForm">
+                <div class="form-group">
+                  <%= f.label :title %>
+                  <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :body %>
+                  <%= f.text_area :body, class: "form-control", placeholder: "Type the body of the note." %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :tag_list, "Tags" %>
+                  <%= f.text_field :tag_list, data: {role: "tagsinput"} %>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <%= f.submit "Save", class: "btn btn-sm btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="modal fade" id="notesDetailsModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">Note Details</div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="customisedForm">
+            <div class="form-group">
+              <span class="heading">Title</span>
+              <span class="details title"></span>
+            </div>
+            <div class="form-group">
+              <span class="heading">Body</span>
+              <span class="details body"></span>
+            </div>
+            <div class="form-group">
+              <span class="heading">Tags</span>
+              <div class="details tags">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

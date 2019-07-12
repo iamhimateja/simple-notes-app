@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %></title>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta http-equiv="cache-control" content="no-cache"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md fixed-top">
+      <%= link_to("Notes App", root_path , :class => "navbar-brand mr-auto") %>
+      <% if user_signed_in? %>
+        <div class="profile_details btn-group btn-group-sm" role="group" aria-label="Basic example">
+          <span class="btn"><i class="fa fa-user"></i></span>
+          <span class="btn"><%= "#{current_user.name} (#{current_user.email})" %></span>
+          <%= link_to("Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary") %>
+        </div>
+      <% else %>
+        <%= link_to("Login", login_path, class: "btn btn-primary btn-sm") %>
+      <% end %>
+    </nav>
+  </header>
+
+  <main class="container">
+    <%= yield %>
+  </main>
+  <%= yield(:modals) %>
+</body>
+</html>

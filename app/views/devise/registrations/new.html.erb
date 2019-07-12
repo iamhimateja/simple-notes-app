@@ -1,0 +1,37 @@
+<% unless resource.errors.blank? %>
+  <ul>
+    <% resource.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-register", autocomplete: "off"}) do |f| %>
+  <div class="form-label-group">
+    <%= f.text_field :name, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Name", required: true, autofocus: true %>
+    <%= f.label :name, "Name" %>
+  </div>
+
+  <div class="form-label-group">
+    <%= f.email_field :email, autocomplete: "off", class: "form-control", placeholder: "Email Address", required: true, autofocus: true %>
+    <%= f.label :email, "Email Address" %>
+  </div>
+
+  <div class="form-label-group">
+    <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password", required: true %>
+    <%= f.label :password %>
+  </div>
+
+  <div class="form-label-group">
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "Confirm Password", required: true %>
+    <%= f.label :password_confirmation, "Confirm Password" %>
+  </div>
+  
+  <div class="row no-padding-margin">
+    <div class="col-sm-12 mb-3 no-padding-margin text-right">
+      <%= f.submit "Register", class: "btn btn-block btn-primary" %>
+    </div>
+    <div class="col-sm-12 text-center">
+      Already registered? then <%= link_to("Login.", login_path) %>
+    </div>
+  </div>
+<% end %>

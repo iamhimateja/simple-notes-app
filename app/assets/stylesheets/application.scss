@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap');
+@import "bootstrap";
+@import "bootstrap-tagsinput";
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  padding-top: 7rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
+
+.blur {
+  filter: blur(30px)
+}
+
+.no-padding-margin {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.form-signin, .form-register, .customisedForm {
+  width: 100%;
+  max-width: 420px;
+  padding: 15px;
+  margin: auto;
+  .form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+    & > input,
+    & > label {
+      height: 3.125rem;
+      padding: .75rem;
+    }
+    & > label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      margin-bottom: 0; /* Override default `<label>` margin */
+      line-height: 1.5;
+      color: #495057;
+      pointer-events: none;
+      cursor: text; /* Match the input under the label */
+      border: 1px solid transparent;
+      border-radius: .25rem;
+      transition: all .1s ease-in-out;
+    }
+    input {
+      &::input-placeholder, &::-webkit-input-placeholder, &::-ms-input-placeholder {
+        color: transparent;
+      }
+      &:not(:placeholder-shown) {
+        padding-top: 1.25rem;
+        padding-bottom: .25rem;
+        & ~ label {
+          padding-top: .25rem;
+          padding-bottom: .25rem;
+          font-size: 12px;
+          color: #777;
+        }
+      }
+    }
+  }
+}
+
+.navbar {
+  background: #fff;
+  box-shadow: 0 0 5px 1px #e6e6e6;
+  padding: 1.5em;
+  .navbar-brand {
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    font-weight: 900;
+  }
+  .profile_details {
+    & > .btn:not(:first-child), & > .btn-group:not(:first-child) > .btn {
+      border-top-left-radius: 0.2rem !important;
+      border-bottom-left-radius: 0.2rem !important;
+    }
+  }
+}
+
+
+/* Fallback for Edge
+-------------------------------------------------- */
+@supports (-ms-ime-align: auto) {
+  .form-label-group > label {
+    display: none;
+  }
+  .form-label-group input::-ms-input-placeholder {
+    color: #777;
+  }
+}
+
+/* Fallback for IE
+-------------------------------------------------- */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .form-label-group > label {
+    display: none;
+  }
+  .form-label-group input:-ms-input-placeholder {
+    color: #777;
+  }
+}
+
+.notes_list_card {
+  .card {
+    position: relative;
+    min-width: 150px;
+    min-height: 150px;
+    cursor: pointer;
+    .card-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .card-body {
+      .del_note {
+        position: absolute;
+        font-size: 25px;
+        top: 0;
+        right: 0;
+        padding: 5px 10px;
+        font-weight: 100;
+        color: #ff1661;
+        text-decoration: none;
+        opacity: 0.5;
+        &:hover {
+          opacity: 1;
+        }
+      }
+      .note-body {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .note_tag {
+        display: inline-block;
+        padding: 5px 10px;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin: 0 5px 5px 0;
+        background: #0062cc;
+        color: #fff;
+        border-radius: 50px;
+        max-width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+    &.addNewNoteCard {
+      border: 0;
+      overflow: hidden;
+      .card-body {
+        padding: 0;
+        a.addNotes {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          border-radius: 0.25rem;
+          border: 1px solid rgba(0, 0, 0, 0.125);
+          &:after {
+            content: "ADD NEW NOTE";
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #bababa;
+            letter-spacing: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+          }
+          i {
+            position: absolute;
+            color: #bababa;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 28px;
+            padding: 15px 18px;
+            box-shadow: 0 0 0 1px;
+            border-radius: 50%;
+          }
+          &:hover, &:focus {
+            border-color: #0679fc;
+            &:after,
+            i {
+              color: #0679fc;
+            }
+          }
+        }
+      }
+    }
+    .card-footer {
+      font-size: 10px;
+    }
+    &:not(.addNewNoteCard) {
+      transition: all 0.08s ease-in-out;
+      &:hover {
+        box-shadow: 0 0 0 5px #fff, 0 0 1px 6px #0679fc;
+      }
+    }
+  }
+}
+
+.modal {
+  .modal-header {
+    background: #0062cc;
+    color: #fff;
+    .close {
+      color: #fff;
+      font-weight: 100;
+    }
+  }
+  .modal-body {
+    .customisedForm {
+      max-width: unset !important;
+      .form-group {
+        label, .heading {
+          display: block;
+          color: rgba(0, 0, 0, 0.6);
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+        }
+
+        .details:not(.tags) {
+          display: block;
+          font-size: 20px;
+          color: #0061cc;
+          font-weight: 900;
+          letter-spacing: 1px;
+          margin-bottom: 10px;
+        }
+        .details.tags {
+          .note_detail_tag {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin: 0 5px 5px 0;
+            background: #0062cc;
+            color: #fff;
+            border-radius: 50px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<% unless resource.errors.blank? %>
+  <ul>
+    <% resource.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin", autocomplete: "off"}) do |f| %>
+  <div class="form-label-group">
+    <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Email Address", required: true, autofocus: true %>
+    <%= f.label :email, "Email Address" %>
+  </div>
+
+  <div class="form-label-group">
+    <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password", required: true %>
+    <%= f.label :password %>
+  </div>
+  <% if devise_mapping.rememberable? %>
+    <div class="checkbox mb-3">
+      <%= f.label :remember_me do %>
+        <%= f.check_box :remember_me %>
+        Remember me
+      <% end %>
+    </div>
+  <% end %>
+  <%= f.submit "Log in", class: "btn btn-lg btn-primary btn-block mb-3" %>
+  <div class="text-center">
+    New user? then <%= link_to("Register.", register_path) %>
+  </div>
+<% end %>
