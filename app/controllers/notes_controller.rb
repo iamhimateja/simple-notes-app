@@ -2,7 +2,7 @@ class NotesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   def index
     @notes = Note.all
-    if @notes.length == 0
+    if @notes.length == 0 and !user_signed_in?
       redirect_to login_path
     end
   end
