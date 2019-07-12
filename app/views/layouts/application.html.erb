@@ -18,7 +18,7 @@
       <% if user_signed_in? %>
         <div class="profile_details btn-group btn-group-sm" role="group" aria-label="Basic example">
           <span class="btn"><i class="fa fa-user"></i></span>
-          <span class="btn"><%= "#{current_user.name} (#{current_user.email})" %></span>
+          <span class="btn"><%= current_user.name %></span>
           <%= link_to("Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary") %>
         </div>
       <% else %>
