@@ -26,4 +26,12 @@ $(document).on('turbolinks:load', function() {
     });
     $('#notesDetailsModal').modal('show');
   })
+
+  $(".form-register input:visible:not(#user_password_confirmation)").off('input').on('input', function(event) {
+    $(this.form).find("input:submit").prop('disabled', (($('#user_name').val() == "") || ($('#user_email').val() == "") || ($('#user_password').val() == "") || ($('#user_password_confirmation').val() == "")))
+  })
+
+  $('#user_password_confirmation').off('input').on('input', function(event) {
+    $(this.form).find("input:submit").prop('disabled', ($(this).val() != $('#user_password').val()))
+  })
 })

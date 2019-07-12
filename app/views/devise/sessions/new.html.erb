@@ -1,12 +1,24 @@
-<% unless resource.errors.blank? %>
-  <ul>
-    <% resource.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= content_for :title, "Login" %>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin", autocomplete: "off"}) do |f| %>
   <h3 class="form-heading">Login to Notes app.</h3>
+  <% unless resource.errors.blank? %>
+    <% resource.errors.full_messages.each do |message| %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%= message %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+  <% end %>
+  <% flash.each do |flash_type, message| %>
+    <div class="alert <%= (flash_type == 'danger') || (flash_type == 'alert') ? 'alert-secondary' : 'alert-success' %> alert-dismissible fade show" role="alert">
+      <%= message %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
   <div class="form-label-group">
     <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Email Address", required: true, autofocus: true %>
     <%= f.label :email, "Email Address" %>

@@ -1,12 +1,16 @@
-<% unless resource.errors.blank? %>
-  <ul>
-    <% resource.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= content_for :title, "Register" %>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-register", autocomplete: "off"}) do |f| %>
   <h3 class="form-heading">Register</h3>
+  <% unless resource.errors.blank? %>
+    <% resource.errors.full_messages.each do |message| %>
+      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+        <%= message %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+  <% end %>
   <div class="form-label-group">
     <%= f.text_field :name, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Name", required: true, autofocus: true %>
     <%= f.label :name, "Name" %>
