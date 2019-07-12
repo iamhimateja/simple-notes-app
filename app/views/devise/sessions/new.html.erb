@@ -6,6 +6,7 @@
   </ul>
 <% end %>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin", autocomplete: "off"}) do |f| %>
+  <h3 class="form-heading">Login to Notes app.</h3>
   <div class="form-label-group">
     <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Email Address", required: true, autofocus: true %>
     <%= f.label :email, "Email Address" %>

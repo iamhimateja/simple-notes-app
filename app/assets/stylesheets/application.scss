@@ -37,6 +37,12 @@ html {
   max-width: 420px;
   padding: 15px;
   margin: auto;
+  .form-heading {
+    font-size: 25px;
+    margin-bottom: 15px;
+    font-weight: 900;
+    color: #0679fc;
+  }
   .form-label-group {
     position: relative;
     margin-bottom: 1rem;
