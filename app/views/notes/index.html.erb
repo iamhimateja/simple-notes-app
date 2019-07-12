@@ -15,7 +15,7 @@
       <div class="col-sm-4 mb-4">
         <div class="card note_card" data-title="<%= note.title %>" data-body="<%= note.body %>" data-tags="<%= note.tag_list %>">
           <div class="card-body">
-            <% if user_signed_in? %>
+            <% if user_signed_in? and (current_user == note.user) %>
               <%= link_to("×", delete_note_path(note.id), data: {confirm: "are you sure?"}, method: :delete, class: "del_note") %>
             <% end %>
             <span class="card-title"><%= note.title %></span>
